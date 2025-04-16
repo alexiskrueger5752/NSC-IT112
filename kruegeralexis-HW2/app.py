@@ -1,43 +1,27 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 app = Flask(__name__)
+
+@app.route('/')
+def default():
+   return render_template('default.html', about="http://localhost:5000/about", 
+   form="http://localhost:5000/form")
 
 @app.route('/about')
 def about():
-   return render_template('about.html')
+   return render_template('about.html', default="http://localhost:5000/")
+
+@app.route('/form')
+def form():
+   return render_template('form.html', default="http://localhost:5000/")
+
+@app.route('/form/result', methods =["GET", "POST"])
+def gfg():
+    if request.method == "POST":
+       # getting input with name = fname in HTML form
+       first_name = request.form.get("fname")
+       # getting input with name = lname in HTML form 
+       return render_template("result.html", first_name = request.form.get("fname"), 
+       last_name = request.form.get("lname"), default="http://localhost:5000/")
 
 if __name__ == '__main__':
    app.run()
-'''
-@app.route('/')
-def hello_world():
-   return 'Hello World'
-
-@app.route('/about')
-def my_info():
-   return 'My name is Alexis Krueger'
-
-if __name__ == '__main__':
-   app.run()
-'''
-
-'''
-from flask import Flask, redirect, url_for
-app = Flask(__name__)
-
-@app.route('/admin')
-def hello_admin():
-   return 'Hello Admin'
-
-@app.route('/guest/<guest>')
-def hello_guest(guest):
-   return 'Hello %s as Guest' % guest
-
-@app.route('/user/<name>')
-def hello_user(name):
-   if name =='admin':
-      return redirect(url_for('hello_admin'))
-   else:
-      return redirect(url_for('hello_guest',guest = name))
-
-if __name__ == '__main__':
-   app.run()'''
