@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+<!--document.fortune.elements[0].value-->
+{% block body %}
+<div id="wrapper">
+    <form name = "fortune" method="POST" action="{{ url_for('fortune')}}">
+        <input type="text" name="user">
+        <select name="color">
+            <option>red</option>
+            <option>yellow</option>
+            <option>blue</option>
+            <option>green</option>
+        </select>
+        <select name="number">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <button>submit</button>
+    </form>
+    <a href="{{ url_for('default') }}">Back to default page</a>
+</div>
+{% endblock %}

@@ -6,7 +6,9 @@
 
 {% block body %}
 <div id="wrapper">
-    <h3>Your name is {{ first_name }} {{ last_name }}</h3>
+    <h4>Based on your choices, you will: meet {{ number }} people
+        named {{ name }}, who will be wearing {{ color }} shirts
+    </h4>
     <a href="{{ url_for('default') }}">Back to default page</a>
 </div>
 {% endblock %}
