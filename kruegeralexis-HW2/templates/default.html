@@ -7,7 +7,7 @@
 {% block body %}
 <div id="wrapper">
     <h1>Printing name from form</h1>
-    <a href="{{ about }}">About page</a>
-    <a href="{{ form }}">Form page</a>
+    <a href="{{ url_for('about') }}">About page</a>
+    <a href="{{ url_for('form') }}">Form page</a>
 </div>
 {% endblock %}
