@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+<h1>The title of the movie is: "{{name}}". It came out in
+    {{year}}, is directed by {{director}}, and is considered
+    a/an {{genre}} movie.
+</h1>
+
+
+    <a href="{{ url_for('default') }}">Default page</a>
+</div>
+{% endblock %}

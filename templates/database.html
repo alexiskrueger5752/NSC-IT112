@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+    <h1>Movie Table</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Movie Name</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Genre</th>
+        </tr>
+        {%  for movie in movies  %}
+        <tr>
+            <td name="id">{{  movie.id  }}</td>
+            <td name="name"><a href="{{ url_for('database_details', 
+                name=movie.movie_name, year=movie.year, 
+                director=movie.director, genre=movie.genre) }}">{{  movie.movie_name  }}</a></td>
+            <td name="year">{{  movie.year }}</td>
+            <td name="director">{{  movie.director }}</td>
+            <td name="genre">{{  movie.genre  }}</td>
+        </tr>
+        {%  endfor  %}
+    </table>
+
+
+    <a href="{{ url_for('default') }}">Default page</a>
+</div>
+{% endblock %}
