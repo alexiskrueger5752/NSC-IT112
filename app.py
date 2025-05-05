@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, session
+from flask import Flask, render_template, url_for, request, redirect, session, jsonify
 #from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 
@@ -11,9 +11,11 @@ db = SQLAlchemy(app)
 def default():
    return render_template('default.html')
 
+
 @app.route('/about')
 def about():
    return render_template('about.html')
+
 
 @app.route('/fortune' , methods =["GET", "POST"])
 def fortune():
@@ -24,6 +26,7 @@ def fortune():
       return redirect(url_for('result', user=name, color=color, number=number))
    return render_template('fortune.html')
 
+
 @app.route('/fortune/result')
 def result():
       name = request.args.get("user")
@@ -32,6 +35,7 @@ def result():
       return render_template("result.html", name=name, color=color, 
                               number=number) 
 
+
 class Movies(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     movie_name = db.Column(db.String(100), nullable=False)
@@ -39,15 +43,51 @@ class Movies(db.Model):
     director = db.Column(db.String(100))
     genre = db.Column(db.String(100))
 
+
     def __init__(self, movie_name, year, director, genre):
       self.movie_name = movie_name
       self.year = year
       self.director = director
       self.genre = genre
+    
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'movie_name': self.movie_name,
+            'year': self.year,
+            'director': self.director,
+            'genre': self.genre
+        }
+
+
+@app.get('/api/movies')
+def api_movies():
+  # return db query results as a JSON list
+  response = jsonify([movie.serialize for movie in Movies.query.all()])
+  response.headers['Content-Type'] = 'application/json'
+  return response
+
+
+@app.post('/api/movie')
+def add_movie():
+    data = request.get_json()
+    try:
+        movie = Movies(movie_name=data['movie_name'], year=data['year'],
+                       director=data['director'], genre=data['genre'],)
+        db.session.add(movie)
+        db.session.commit()
+        return jsonify([movie.serialize for movie in Movies.query.all()]), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"status": "failure", "error": str(e)}), 500
+
 
 @app.route('/database')
 def database():
       return render_template('database.html', movies=Movies.query.all())
+
 
 @app.route('/database/detail')
 def database_details():
@@ -58,6 +98,7 @@ def database_details():
       return render_template("database_details.html", name=name, 
                               year=year, director=director, genre=genre) 
     
+
 with app.app_context():
     db.drop_all()
     db.create_all() 
@@ -70,6 +111,7 @@ with app.app_context():
       ]
       db.session.add_all(all_movies)
       db.session.commit()
+
 
 if __name__ == '__main__':
    app.run()
