@@ -64,7 +64,6 @@ class Movies(db.Model):
 
 @app.get('/api/movies')
 def api_movies():
-  # return db query results as a JSON list
   response = jsonify([movie.serialize for movie in Movies.query.all()])
   response.headers['Content-Type'] = 'application/json'
   return response
