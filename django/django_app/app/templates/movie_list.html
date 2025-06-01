@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Movie List Page</title>
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+    <h1>Movie Table</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Year</th>
+        </tr>
+        {%  for movie in movies  %}
+        <tr>
+            <td name="id">{{  movie.id  }}</td>
+            <td name="title"><a href="{% url 'movie_details' movie.id %}">
+                {{  movie.title  }}</a></td>
+            <td name="genre">{{  movie.genre  }}</td>
+            <td name="year">{{  movie.year }}</td>
+        </tr>
+        {%  endfor  %}
+    </table>
+    <a href="{% url 'home' %}">Back to home page</a>
+    </div>
+{% endblock %}

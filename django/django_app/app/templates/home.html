@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Home Page</title>
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+    <h1>
+        {% if user_name %}
+         Hello {{ user_name }}! Welcome to the Cuphead site.
+        {% else %}
+            Hello user! Welcome to the Cuphead site.
+        {% endif %}
+    </h1>
+    <a href="{% url 'movie_list' %}">Check out the movie list!</a>
+    <div>
+        <img src="{% static 'cuphead.jpg' %}" alt="cuphead image">
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>{{movie.title}} Page</title>
+
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+<h1>Movie Details</h1>
+<h2>This movie is: "{{movie.title}}", it is considered
+    a/an {{movie.genre}} movie and came out in {{movie.year}}.
+</h2>
+<a href="{% url 'movie_list' %}">Back to movie list</a>
+</div>
+{% endblock %}

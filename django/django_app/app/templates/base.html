@@ -3,19 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% block head %}{% endblock %}
 </head>
 <body>
-    <h1>
-        {% if user_name %}
-            Hello {{ user_name }}! Welcome to the Cuphead site.
-        {% else %}
-            Hello user! Welcome to the Cuphead site.
-        {% endif %}
-    </h1>
-    <div>
-        <img src="{% static 'cuphead.jpg' %}" alt="cuphead image">
-    </div>
+    {% block body %}{% endblock %}
 </body>
 </html>

@@ -2,6 +2,31 @@ body{
     background: yellow;
     text-align: center;
 }
+#wrapper{
+    width:940px;
+    height: 500px;
+    margin:0 auto;
+    font-size: 1.1em;
+}
 img{
-    max-width: 500px;   
+    max-width: 500px;
+    margin-top: 15px;
+}
+table a{
+    display:block;
+}
+table{
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    margin: 20px auto;
+}
+th, td{
+    width: 20%;
+}
+table, th, td{
+    border: 2px solid;
+    border-color: rgb(20, 0, 39);
+}
+h1{
+    margin-bottom: 15px;
 }
