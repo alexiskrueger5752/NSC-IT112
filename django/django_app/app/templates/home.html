@@ -13,7 +13,8 @@
             Hello user! Welcome to the Cuphead site.
         {% endif %}
     </h1>
-    <a href="{% url 'movie_list' %}">Check out the movie list!</a>
+    <a href="{% url 'movie_table' %}">Check out the movie table!</a>
+    <a href="{% url 'movie_list' %}">Or check out our JSON formatted movie list!</a>
     <div>
         <img src="{% static 'cuphead.jpg' %}" alt="cuphead image">
     </div>

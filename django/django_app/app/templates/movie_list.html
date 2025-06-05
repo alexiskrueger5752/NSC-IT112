@@ -17,7 +17,7 @@
         {%  for movie in movies  %}
         <tr>
             <td name="id">{{  movie.id  }}</td>
-            <td name="title"><a href="{% url 'movie_details' movie.id %}">
+            <td name="title"><a href="{% url 'movie_table_details' movie.id %}">
                 {{  movie.title  }}</a></td>
             <td name="genre">{{  movie.genre  }}</td>
             <td name="year">{{  movie.year }}</td>
@@ -25,5 +25,6 @@
         {%  endfor  %}
     </table>
     <a href="{% url 'home' %}">Back to home page</a>
+    <a href="{% url 'movie_list' %}">JSON format list</a>
     </div>
 {% endblock %}
